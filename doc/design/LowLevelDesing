@@ -43,4 +43,6 @@ Highlights
         - This framework is configuration based. The input, source system and output can be configurable
 
         - New ETL components can be easily developed and integrated using this framework
+        
+        - Monitoring component is not available in this code. We can develop a sms/email notification system by querying the file system on daily basis 
 
