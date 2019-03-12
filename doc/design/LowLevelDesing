@@ -1,0 +1,46 @@
+External System for rate conversion - https://openexchangerates.org/
+
+Spark Components for etl-
+
+   - This framework consists of three modules
+            1. Common
+                - common functionalities for  spark operations
+                - Generic way of running the extract, transform and load methods
+
+            2. Exchangerateproducer -
+                   Extract -
+                        * connect with openexchangerates and get conversion rate as json
+                        * store the raw json
+                        * Example output - FinancialReport/e2e/src/main/resources/e2eOutput/openexchangerates/raw/ExchangeRate
+                   Transform -
+                        * Process the raw json to get the required value
+                        * convert the data into spark view
+                   Load -
+                        *Load the processed data into file system as orc file
+                        * Example output - FinancialReport/e2e/src/main/resources/e2eOutput/processed/ExchangeRate
+
+            2. report -
+                    Extract -
+                        * Extracts the raw report and processed conversion rate data
+                        Example Input -
+                          Rawreport - FinancialReport/e2e/src/main/resources/e2eOutput/financialreport
+                          conversiondata -FinancialReport/e2e/src/main/resources/e2eOutput/processed/ExchangeRate
+
+                    Transform -
+                         * transform the raw report to convert the currency.
+                    Load -
+                         * write the final output
+                         * Exampleoutput -FinancialReport/e2e/src/main/resources/e2eOutput/report/financeReport
+
+Highlights
+------------
+        - Exchangerateproducer and report are individual components
+
+        - This components can be deployed with cron scheduling
+
+        - This components can be deployed as Aws Lambda
+
+        - This framework is configuration based. The input, source system and output can be configurable
+
+        - New ETL components can be easily developed and integrated using this framework
+
